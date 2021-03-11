@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "Testing"
+date:   2021-03-12 00:41:00 +0100
+categories: jekyll update
+---
+
+{% highlight java %}
+
+public void printHi(String name){
+    System.out.println("Hi " + name);
+}
+printHi("Kristof")
+// prints 'Hi, Kristof' to STDOUT.
+
+{% endhighlight %}

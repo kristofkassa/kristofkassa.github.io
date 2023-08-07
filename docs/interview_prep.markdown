@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Interview Preparation
+title: Interviews
 permalink: /preparation/
 ---
 

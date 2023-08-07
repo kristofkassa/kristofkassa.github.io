@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Posts on Derivative Pricing
+title: Derivative Pricing
 permalink: /derivative-pricing/
 ---
 

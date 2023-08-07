@@ -5,7 +5,7 @@ date:   2023-08-07 19:36:00 +0100
 categories: [derivative_pricing]
 ---
 
-# Title: Understanding the Binomial Tree Model for Pricing Options 
+### Understanding the Binomial Tree Model for Pricing Options 
 
 When it comes to pricing options, understanding the binomial tree model is crucial. In this article, we'll discuss how this model operates and demonstrate how to implement it using Python.
 

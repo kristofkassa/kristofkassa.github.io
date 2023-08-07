@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Financial Derivative Basics"
-date:   2023-08-07 19:36:00 +0100
-categories: Binomial_model
+title: "Financial Derivative Basics"
+date: 2023-08-07 19:36:00 +0100
+categories: [Derivative Pricing]
 ---
 
 # Title: Understanding the Binomial Tree Model for Pricing Options 

@@ -1,0 +1,88 @@
+---
+layout: post
+title:  "Financial Derivative Basics"
+date:   2023-08-07 19:36:00 +0100
+categories: [Derivative_Pricing, Option, Binomial_model]
+---
+
+# Title: Understanding the Binomial Tree Model for Pricing Options 
+
+When it comes to pricing options, understanding the binomial tree model is crucial. In this article, we'll discuss how this model operates and demonstrate how to implement it using Python.
+
+The binomial model is a discrete model used in calculating the value of options. The core concept is constructing a binomial tree, which is a graphical representation of possible intrinsic values an option may take at different times.
+
+Before we start, we'll need to import the `numpy` library as it provides tools for working with arrays which are essential for our calculations.
+
+{% highlight python %}
+import numpy as np
+{% endhighlight %}
+
+We need several inputs to compute the binomial tree: upward movement (`u`), downward movement (`d`), risk-free rate (`rf`), time-horizon (`T`), and number of steps in the tree (`N`). All these are user-inputs for our function.
+
+One important point is the concept of time-step. The time-step (`dt`) in our binomial model represents how long does moving from one node to the next one in the tree represent in terms of time? It's calculated as `T/N`.
+
+### Constructing a Binomial Tree
+
+Here's a Python function that simulates the underlying stock price given some inputs: initial stock price (`S_ini`), time-horizon (`T`), upward (`u`) and downward (`d`) movements, and number of steps (`N`).
+
+{% highlight python %}
+def binomial_tree(S_ini, T, u, d, N):
+    S = np.zeros([N + 1, N + 1])  # Underlying price
+    for i in range(0, N + 1):
+        S[N, i] = S_ini * (u ** (i)) * (d ** (N - i))
+    for j in range(N - 1, -1, -1):
+        for i in range(0, j + 1):
+            S[j, i] = S_ini * (u ** (i)) * (d ** (j - i))
+    return S
+{% endhighlight %}
+
+### Extending the Tree with Call Option Payoffs
+
+We can extend the function by adding another variable that computes the payoffs associated with a Call Option. Here, we're focusing on a European Call Option with a specific strike price (`K`).
+
+{% highlight python %}
+def binomial_tree_call(S_ini, K, T, u, d, N):
+    C = np.zeros([N + 1, N + 1])  # Call prices
+    S = np.zeros([N + 1, N + 1])  # Underlying price
+    for i in range(0, N + 1):
+        C[N, i] = max(S_ini * (u ** (i)) * (d ** (N - i)) - K, 0)
+        S[N, i] = S_ini * (u ** (i)) * (d ** (N - i))
+    for j in range(N - 1, -1, -1):
+        for i in range(0, j + 1):
+            S[j, i] = S_ini * (u ** (i)) * (d ** (j - i))
+    return S, C
+{% endhighlight %}
+
+### Introducing Risk-Neutral Probabilities and Backward Induction
+
+Lastly, let's work with risk-neutral probabilities. Once we have the probabilities, we can use backward induction to calculate the value of the Call Option at each node.
+
+{% highlight python %}
+def binomial_call_full(S_ini, K, T, r, u, d, N):
+    dt = T / N  # Define time step
+    p = (np.exp(r * dt) - d) / (u - d)  # Risk neutral probabilities (probs)
+    C = np.zeros([N + 1, N + 1])  # Call prices
+    S = np.zeros([N + 1, N + 1])  # Underlying price
+    for i in range(0, N + 1):
+        C[N, i] = max(S_ini * (u ** (i)) * (d ** (N - i)) - K, 0)
+        S[N, i] = S_ini * (u ** (i)) * (d ** (N - i))
+    for j in range(N - 1, -1, -1):
+        for i in range(0, j + 1):
+            C[j, i] = np.exp(-r * dt) * (p * C[j + 1, i + 1] + (1 - p) * C[j + 1, i])
+            S[j, i] = S_ini * (u ** (i)) * (d ** (j - i))
+    return C[0, 0], C, S
+{% endhighlight %}
+
+This function incorporates all the factors we discussed and gives the Call Option price today. We achieve this by doing backward induction from the last period (maturity) and work backwards.
+
+### Binomial Model Convergence
+
+A key strength of the Binomial Option Pricing Model is its mathematical robustness and flexibility. In fact, as the number of steps in the binomial tree increases to infinity, the Binomial Option Pricing Model converges to the Black-Scholes-Merton Model, one of the cornerstones in the field of financial derivatives pricing.
+
+The Black-Scholes-Merton Model, which assumes a continuous price evolution, provides a closed-form solution for the pricing of European options. In contrast, the Binomial Model, with its discrete nature and flexible time steps, allows us to price a wide range of derivative instruments, including American options that can be exercised at any point up to expiration, and exotic options with more complex payoffs.
+
+The convergence of the Binomial Model to the Black-Scholes-Merton Model is an important feature as it essentially bridges the gap between the discrete and continuous world of derivative pricing. By increasing the number of time steps (N) in the binomial tree, the model becomes more accurate, but it also becomes more computationally intensive.
+
+Yet, this convergence property is a testament to the robustness of the Binomial Model. Despite its relative simplicity, it can approximate complex, continuous models given enough computational power. This is why the Binomial Model serves as an excellent starting point for understanding the principles of options pricing and risk management.
+
+I encourage you to play around with these functions to get a better grasp of how they work. Understanding this will give you a solid foundation for understanding more complex option pricing models.

@@ -94,7 +94,9 @@ Let's suppose you have the following parameters for a binomial option:
 `C0, C, S = binomial_call_full(100, 100, 1, 0.05, 1.2, 0.8, 3)`
 
 `C0`: This is the price of the option at the initial time (t=0).
+
 `C`: This is a 2D numpy array that contains the price of the option at each node of the binomial tree. Each row in this array corresponds to a time step, and each column corresponds to a state (number of upward movements).
+
 `S`: This is a 2D numpy array that contains the price of the underlying stock at each node of the binomial tree. Each row in this array corresponds to a time step, and each column corresponds to a state (number of upward movements).
 
 {% highlight python %}
@@ -117,17 +119,21 @@ for i in range(len(S)):
     print()
 {% endhighlight %}
 
+{% highlight python %}
 Option Prices at each node: 
    16.86 
   4.32 27.99 
  0.00 8.10 45.65 
 0.00 0.00 15.20 72.80 
+{% endhighlight %}
 
+{% highlight python %}
 Underlying Prices at each node: 
    100.00 
   80.00 120.00 
  64.00 96.00 144.00 
 51.20 76.80 115.20 172.80 
+{% endhighlight %}
 
 This function incorporates all the factors we discussed and gives the Call Option price today. We achieve this by doing backward induction from the last period (maturity) and work backwards.
 
@@ -135,10 +141,40 @@ This function incorporates all the factors we discussed and gives the Call Optio
 
 A key strength of the Binomial Option Pricing Model is its mathematical robustness and flexibility. In fact, as the number of steps in the binomial tree increases to infinity, the Binomial Option Pricing Model converges to the Black-Scholes-Merton Model, one of the cornerstones in the field of financial derivatives pricing.
 
-The Black-Scholes-Merton Model, which assumes a continuous price evolution, provides a closed-form solution for the pricing of European options. In contrast, the Binomial Model, with its discrete nature and flexible time steps, allows us to price a wide range of derivative instruments, including American options that can be exercised at any point up to expiration, and exotic options with more complex payoffs.
+We have the time step calculation:
 
-The convergence of the Binomial Model to the Black-Scholes-Merton Model is an important feature as it essentially bridges the gap between the discrete and continuous world of derivative pricing. By increasing the number of time steps (N) in the binomial tree, the model becomes more accurate, but it also becomes more computationally intensive.
+$$
+dt = \frac{T}{N}
+$$
 
-Yet, this convergence property is a testament to the robustness of the Binomial Model. Despite its relative simplicity, it can approximate complex, continuous models given enough computational power. This is why the Binomial Model serves as an excellent starting point for understanding the principles of options pricing and risk management.
+The risk-neutral probability calculation:
 
-I encourage you to play around with these functions to get a better grasp of how they work. Understanding this will give you a solid foundation for understanding more complex option pricing models.
+$$
+p = \frac{e^{r \cdot dt} - d}{u - d}
+$$
+
+For each node $(i, j)$ in the tree, where $i$ represents the time step and $j$ represents the state (number of upward movements), we calculate the call option price $C[i, j]$ and the stock price $S[i, j]$:
+
+At the final time step $(i=N)$, we have:
+
+$$
+C[N, j] = \max[S_{\text{ini}} \cdot u^{j} \cdot d^{N - j} - K, 0]
+$$
+
+$$
+S[N, j] = S_{\text{ini}} \cdot u^{j} \cdot d^{N - j}
+$$
+
+At all earlier time steps $(i < N)$, we have:
+
+$$
+C[i, j] = e^{-r \cdot dt} \cdot [p \cdot C[i + 1, j + 1] + (1 - p) \cdot C[i + 1, j]]
+$$
+
+$$
+S[i, j] = S_{\text{ini}} \cdot u^{j} \cdot d^{i - j}
+$$
+
+Note that the indices $i$ and $j$ are integer values, with $i$ going from $0$ to $N$ and $j$ going from $0$ to $i$ at each step. The $\max$ function in the equation for $C[N, j]$ represents the intrinsic value of the call option, which is the maximum of the stock price minus the strike price and zero.
+
+Finally, the function returns $C[0, 0]$, $C$, and $S$, where $C[0, 0]$ represents the option price at $t=0$, and $C$ and $S$ represent the option prices and stock prices at each node in the binomial tree, respectively.

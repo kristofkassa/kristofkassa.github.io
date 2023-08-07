@@ -81,28 +81,55 @@ def binomial_call_full(S_ini, K, T, r, u, d, N):
     
 {% endhighlight %}
 
+Let's suppose you have the following parameters for a binomial option:
+
+- Initial Stock price (`S_ini`): $100
+- Strike price (`K`): $100
+- Time to maturity in years (`T`): 1
+- Risk-free interest rate (`r`): 5% (0.05)
+- Upward price movement (`u`): 1.2
+- Downward price movement (`d`): 0.8
+- Number of periods (`N`): 3
+
+`C0, C, S = binomial_call_full(100, 100, 1, 0.05, 1.2, 0.8, 3)`
+
+`C0`: This is the price of the option at the initial time (t=0).
+`C`: This is a 2D numpy array that contains the price of the option at each node of the binomial tree. Each row in this array corresponds to a time step, and each column corresponds to a state (number of upward movements).
+`S`: This is a 2D numpy array that contains the price of the underlying stock at each node of the binomial tree. Each row in this array corresponds to a time step, and each column corresponds to a state (number of upward movements).
+
+{% highlight python %}
+C0 = 16.863001872208116
+{% endhighlight %}
+
+{% highlight python %}
+print("Option Prices at each node: ")
+for i in range(len(C)):
+    print(' ' * (len(C) - i - 1), end='')
+    for j in range(i+1):
+        print("{:.2f} ".format(C[i, j]), end='')
+    print()
+
+print("\nUnderlying Prices at each node: ")
+for i in range(len(S)):
+    print(' ' * (len(S) - i - 1), end='')
+    for j in range(i+1):
+        print("{:.2f} ".format(S[i, j]), end='')
+    print()
+{% endhighlight %}
+
+Option Prices at each node: 
+   16.86 
+  4.32 27.99 
+ 0.00 8.10 45.65 
+0.00 0.00 15.20 72.80 
+
+Underlying Prices at each node: 
+   100.00 
+  80.00 120.00 
+ 64.00 96.00 144.00 
+51.20 76.80 115.20 172.80 
+
 This function incorporates all the factors we discussed and gives the Call Option price today. We achieve this by doing backward induction from the last period (maturity) and work backwards.
-
-For a call option:
-
-$$
-C = \frac{1}{1 + r} [p \cdot C_{up} + (1 - p) \cdot C_{down}]
-$$
-
-Where:
-- \(C_{up} = \max[S_0 \cdot u - K, 0]\) is the value of the call if the price goes up
-- \(C_{down} = \max[S_0 \cdot d - K, 0]\) is the value of the call if the price goes down
-
-For a put option:
-
-$$
-P = \frac{1}{1 + r} [p \cdot P_{up} + (1 - p) \cdot P_{down}]
-$$
-
-Where:
-- \(P_{up} = \max[K - S_0 \cdot u, 0]\) is the value of the put if the price goes up
-- \(P_{down} = \max[K - S_0 \cdot d, 0]\) is the value of the put if the price goes down
-
 
 ### Binomial Model Convergence
 

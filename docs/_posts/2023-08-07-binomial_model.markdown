@@ -14,7 +14,9 @@ The binomial model is a discrete model used in calculating the value of options.
 Before we start, we'll need to import the `numpy` library as it provides tools for working with arrays which are essential for our calculations.
 
 {% highlight python %}
+
 import numpy as np
+
 {% endhighlight %}
 
 We need several inputs to compute the binomial tree: upward movement (`u`), downward movement (`d`), risk-free rate (`rf`), time-horizon (`T`), and number of steps in the tree (`N`). All these are user-inputs for our function.
@@ -26,6 +28,7 @@ One important point is the concept of time-step. The time-step (`dt`) in our bin
 Here's a Python function that simulates the underlying stock price given some inputs: initial stock price (`S_ini`), time-horizon (`T`), upward (`u`) and downward (`d`) movements, and number of steps (`N`).
 
 {% highlight python %}
+
 def binomial_tree(S_ini, T, u, d, N):
     S = np.zeros([N + 1, N + 1])  # Underlying price
     for i in range(0, N + 1):
@@ -34,6 +37,7 @@ def binomial_tree(S_ini, T, u, d, N):
         for i in range(0, j + 1):
             S[j, i] = S_ini * (u ** (i)) * (d ** (j - i))
     return S
+
 {% endhighlight %}
 
 ### Extending the Tree with Call Option Payoffs
@@ -41,6 +45,7 @@ def binomial_tree(S_ini, T, u, d, N):
 We can extend the function by adding another variable that computes the payoffs associated with a Call Option. Here, we're focusing on a European Call Option with a specific strike price (`K`).
 
 {% highlight python %}
+
 def binomial_tree_call(S_ini, K, T, u, d, N):
     C = np.zeros([N + 1, N + 1])  # Call prices
     S = np.zeros([N + 1, N + 1])  # Underlying price
@@ -51,6 +56,7 @@ def binomial_tree_call(S_ini, K, T, u, d, N):
         for i in range(0, j + 1):
             S[j, i] = S_ini * (u ** (i)) * (d ** (j - i))
     return S, C
+
 {% endhighlight %}
 
 ### Introducing Risk-Neutral Probabilities and Backward Induction
@@ -58,6 +64,7 @@ def binomial_tree_call(S_ini, K, T, u, d, N):
 Lastly, let's work with risk-neutral probabilities. Once we have the probabilities, we can use backward induction to calculate the value of the Call Option at each node.
 
 {% highlight python %}
+
 def binomial_call_full(S_ini, K, T, r, u, d, N):
     dt = T / N  # Define time step
     p = (np.exp(r * dt) - d) / (u - d)  # Risk neutral probabilities (probs)
@@ -71,9 +78,31 @@ def binomial_call_full(S_ini, K, T, r, u, d, N):
             C[j, i] = np.exp(-r * dt) * (p * C[j + 1, i + 1] + (1 - p) * C[j + 1, i])
             S[j, i] = S_ini * (u ** (i)) * (d ** (j - i))
     return C[0, 0], C, S
+    
 {% endhighlight %}
 
 This function incorporates all the factors we discussed and gives the Call Option price today. We achieve this by doing backward induction from the last period (maturity) and work backwards.
+
+For a call option:
+
+$$
+C = \frac{1}{1 + r} [p \cdot C_{up} + (1 - p) \cdot C_{down}]
+$$
+
+Where:
+- \(C_{up} = \max[S_0 \cdot u - K, 0]\) is the value of the call if the price goes up
+- \(C_{down} = \max[S_0 \cdot d - K, 0]\) is the value of the call if the price goes down
+
+For a put option:
+
+$$
+P = \frac{1}{1 + r} [p \cdot P_{up} + (1 - p) \cdot P_{down}]
+$$
+
+Where:
+- \(P_{up} = \max[K - S_0 \cdot u, 0]\) is the value of the put if the price goes up
+- \(P_{down} = \max[K - S_0 \cdot d, 0]\) is the value of the put if the price goes down
+
 
 ### Binomial Model Convergence
 

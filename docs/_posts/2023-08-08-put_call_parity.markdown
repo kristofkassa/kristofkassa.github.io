@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Put-Call Parity in the Binomial Model"
-date:   2023-08-07 19:36:00 +0100
+date:   2023-08-08 22:26:00 +0100
 categories: [derivative_pricing]
 ---
 

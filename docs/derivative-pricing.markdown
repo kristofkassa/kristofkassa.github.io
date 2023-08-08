@@ -9,3 +9,5 @@ Derivatives are financial contracts that derive their value from an underlying a
 ## [Binomial Model](/derivative_pricing/2023/08/07/binomial_model)
 
 When it comes to pricing options, understanding the binomial tree model is crucial. In this article, we'll discuss how this model operates and demonstrate how to implement it using Python.
+
+## [Put-Call parity](/derivative_pricing/2023/08/08/put_call_parity)

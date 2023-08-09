@@ -12,4 +12,8 @@ When it comes to pricing options, understanding the binomial tree model is cruci
 
 ## [Put-Call parity](/derivative_pricing/2023/08/07/put_call_parity)
 
+Put-Call Parity ensures balance in the options market. If the relationship wasn't in balance, it would offer arbitrage opportunities which are essentially "free money" strategies - something markets tend to correct quickly.
+
 ## [Introducing Delta](/derivative_pricing/2023/08/09/introducing_delta)
+
+We'll introduce the concept of delta hedging, a strategy used to hedge against price movements in the underlying asset.

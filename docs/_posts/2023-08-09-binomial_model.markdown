@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Binomial Model"
-date:   2023-08-07 19:36:00 +0100
-categories: [derivative_pricing]
+title: "Binomial Model"
+date: 2023-08-09
+categories: derivative_pricing
 ---
 
 ### Understanding the Binomial Tree Model for Pricing Options 

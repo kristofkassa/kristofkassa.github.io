@@ -11,6 +11,8 @@ When it comes to pricing options, understanding the binomial tree model is cruci
 
 The binomial model is a discrete model used in calculating the value of options. The core concept is constructing a binomial tree, which is a graphical representation of possible intrinsic values an option may take at different times.
 
+![Binomial Model](/images/binomial.jpg)
+
 Before we start, we'll need to import the `numpy` library as it provides tools for working with arrays which are essential for our calculations.
 
 {% highlight python %}

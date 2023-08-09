@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Binomial Model"
-date: 2023-08-09
+date: 2023-08-07
 categories: derivative_pricing
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Introducing Delta"
-date:   2023-08-09 19:36:00 +0100
+title: "Introducing Delta"
+date: 2023-08-09
 categories: [derivative_pricing]
 ---
 

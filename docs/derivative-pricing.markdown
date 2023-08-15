@@ -17,3 +17,7 @@ Put-Call Parity ensures balance in the options market. If the relationship wasn'
 ## [Introducing Delta](/derivative_pricing/2023/08/09/introducing_delta)
 
 We'll introduce the concept of delta hedging, a strategy used to hedge against price movements in the underlying asset.
+
+## [Introducing Delta](/derivative_pricing/2023/08/15/calibrating_binomial)
+
+Calibrating the Binomial Option Pricing Model (BOPM) using the underlying asset's volatility.

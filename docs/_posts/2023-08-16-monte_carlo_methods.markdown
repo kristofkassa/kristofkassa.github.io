@@ -5,9 +5,21 @@ date: 2023-08-16
 categories: derivative_pricing
 ---
 
+### History lesson
+
+The Monte Carlo method, a groundbreaking statistical technique, was named after the famous Monte Carlo casino in Monaco, not because it was created there, but due to the method's use of randomness and chance, reminiscent of gambling. The method was developed during the 1940s by physicists **Stanislaw Ulam** and **John von Neumann** while they were working on nuclear weapons projects at the Los Alamos National Laboratory in the United States.
+
+The story goes that Ulam was recovering from an illness and was playing a lot of solitaire. He became interested in calculating the chances of winning a particular solitaire game but found that calculating it deterministically would be incredibly complex. Instead, he realized that he could get a reasonable estimate by simply playing the game many times (or having a computer play it) and observing the fraction of games he won.
+
+Ulam discussed this 'statistical sampling' technique with John von Neumann, and the two of them developed it into a general method for approximating complex mathematical calculations using random sampling — essentially, using randomness to solve problems that might be deterministic in principle, but are too complex to solve in a deterministic manner.
+
+von Neumann realized the potential of this method in the context of the ongoing work at Los Alamos, and it soon became an essential tool for the Manhattan Project, allowing the scientists to model the random behavior of particles to understand complex physical systems.
+
+That's why it is called the Monte Carlo method: because it employs randomness and probability, much like the games of chance played in the famous casino.
+
 ### Introduction
 
-In this post, we’ll delve into the exciting world of **Monte Carlo methods**, a powerful technique that plays a critical role in modern quantitative finance. We'll begin with a basic introduction, aiming to build a solid foundation that will be valuable when tackling more complex problems later in the series.
+**Monte Carlo methods**, a powerful technique that plays a critical role in modern quantitative finance. We'll begin with a basic introduction, aiming to build a solid foundation that will be valuable when tackling more complex problems later in the series.
 
 At its core, the Monte Carlo method is a statistical technique that allows us to approximate complex mathematical problems using random sampling. Here’s the basic idea:
 

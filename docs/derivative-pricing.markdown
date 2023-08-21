@@ -10,7 +10,7 @@ Derivatives are financial contracts that derive their value from an underlying a
 
 When it comes to pricing options, understanding the binomial tree model is crucial. In this article, we'll discuss how this model operates and demonstrate how to implement it using Python.
 
-## 2. [Put-Call parity](/derivative_pricing/2023/08/07/put_call_parity)
+## 2. [Put-Call parity](/derivative_pricing/2023/08/08/put_call_parity)
 
 Put-Call Parity ensures balance in the options market. If the relationship wasn't in balance, it would offer arbitrage opportunities which are essentially "free money" strategies - something markets tend to correct quickly.
 

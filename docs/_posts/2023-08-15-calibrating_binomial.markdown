@@ -47,7 +47,44 @@ def call_option_delta(S_ini, K, T, r, sigma, N):
             )
     return C[0, 0], C, S, Delta
 
+call_price, C, S, delta =call_option_delta(100, 90, 1, 0, 0.3, 10)
 {% endhighlight %}
+
+Let's see the graphical representation of our tree.
+
+{% highlight python %}
+import matplotlib.pyplot as plt
+
+def plot_binomial_tree(S, C):
+    N = S.shape[0]
+    fig, ax = plt.subplots(2, 1, figsize=(10, 12))
+
+    # Function to plot tree
+    def plot_tree(ax, data, title, color):
+        for i in range(N):
+            for j in range(i + 1):
+                x = j - i/2  # Adjust x coordinates for tree shape
+                y = N - i   # Adjust y coordinates to start from the bottom
+                ax.plot(x, y, 'o', color=color)
+                ax.text(x, y, f'{data[i,j]:.2f}', ha='center', va='center', fontsize=10, bbox=dict(facecolor='white', edgecolor='white', boxstyle='circle'))
+                if i < N - 1:  # Draw connecting lines only for non-terminal nodes
+                    ax.plot([x, x - 0.5], [y, y - 1], 'k-')  # Line for downward movement
+                    ax.plot([x, x + 0.5], [y, y - 1], 'k-')  # Line for upward movement
+        ax.set_title(title)
+        ax.axis('off')
+
+    # Plot underlying and option prices
+    plot_tree(ax[0], S, "Underlying Prices", 'blue')
+    plot_tree(ax[1], C, "Option Prices", 'red')
+
+    plt.tight_layout()
+    plt.show()
+
+# Call the plotting function
+plot_binomial_tree(S, C)
+{% endhighlight %}
+
+![Price Path](/images/binomial_model_cal.png)
 
 ### Convergence Analysis
 

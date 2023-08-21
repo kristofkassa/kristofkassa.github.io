@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Constraints of the Black-Scholes Model: A Data-Driven Analysis"
-date: 2023-08-20
+date: 2023-08-21
 categories: derivative_pricing
 ---
 

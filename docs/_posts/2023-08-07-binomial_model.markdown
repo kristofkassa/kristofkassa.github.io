@@ -11,7 +11,22 @@ When it comes to pricing options, understanding the binomial tree model is cruci
 
 The binomial model is a discrete model used in calculating the value of options. The core concept is constructing a binomial tree, which is a graphical representation of possible intrinsic values an option may take at different times.
 
-![Binomial Model](/images/binomial.png)
+Steps to calculate the option price using backward induction:
+
+Terminal Payoffs: At the final nodes of the binomial tree (at expiration), the option value is straightforward to determine. It is simply the intrinsic value of the option.
+
+For a European Call: max(S−K,0)
+For a European Put: max(K−S,0)
+
+Where S
+S is the stock price and K
+K is the strike price.
+
+Backward Induction: Once we have the terminal option values, we move one step backward in the tree and calculate the option value at each preceding node. We use the concept of risk-neutral valuation to do this.
+
+Iterate Backward: We repeat the above step, working backward from the option's expiration to the present, node by node, until we reach the very first node, which gives us the option's current market value.
+
+![Binomial Model](/images/binomial_tree.PNG)
 
 Before we start, we'll need to import the `numpy` library as it provides tools for working with arrays which are essential for our calculations.
 

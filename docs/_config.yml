@@ -50,7 +50,3 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
-
-disqus:
-  shortname: kassakristof
-url: "https://kristofkassa.github.io"

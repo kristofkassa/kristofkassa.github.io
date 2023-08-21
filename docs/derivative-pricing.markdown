@@ -29,3 +29,23 @@ An American option gives its holder the right to exercise the option at any poin
 ## 6. [Monte Carlo Methods intro](/derivative_pricing/2023/08/16/monte_carlo_methods)
 
 At its core, the Monte Carlo method is a statistical technique that allows us to approximate complex mathematical problems using random sampling.
+
+## 7. [Markov's Property and Geometric Brownian Motion](/derivative_pricing/2023/08/17/markov_property_and_gbm)
+
+Highlighting the principle that future states depend solely on the present state and not on the events that occurred before it, this post explains Markov's Property and its significant role in Geometric Brownian Motion.
+
+## 8. [Ito's Lemma and Black Scholes](/derivative_pricing/2023/08/18/ito_lemma_black_scholes)
+
+This post elucidates the connection between Ito's Lemma and the Black-Scholes model, revealing the underlying stochastic calculus that powers option pricing.
+
+## 9. [Bridging the Black-Scholes with Monte Carlo Simulations](/derivative_pricing/2023/08/19/bs_and_mc)
+
+By melding two powerful financial modeling techniques, this post illustrates how Monte Carlo simulations can enhance the predictive capabilities of the Black-Scholes model.
+
+## 10. [Simulating Interest Rates: Vasicek Model](/derivative_pricing/2023/08/20/interest_rates_vasicek_model)
+
+Delving into the intricacies of interest rate simulations, this post introduces the Vasicek Model's fundamentals and its utility in predicting interest rate movements.
+
+## 11. [The Constraints of the Black-Scholes Model: A Data-Driven Analysis](/derivative_pricing/2023/08/21/bs_assumptions)
+
+Exploring the inherent limitations of the Black-Scholes model, this post offers a data-centric critique of its assumptions and real-world applicability.

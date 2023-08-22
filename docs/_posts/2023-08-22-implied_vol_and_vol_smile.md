@@ -85,36 +85,7 @@ The visual might reveal not a complete smile but a smirk or skew, a phenomenon p
 
 While Yahoo Finance provides implied volatility, there's value in understanding its derivation. The Newton-Raphson method is a popular iterative approach to this:
 
-The Newton-Raphson method is a root-finding algorithm that seeks to find successively better approximations to the roots of a real-valued function. In the context of implied volatility, we use it to find the root of the equation:
-
-$ C_{\text{market}} - C_{\text{BS}}(\sigma) = 0 $
-
-Where:
-- $C_{\text{market}}$ is the market price of the option.
-- $C_{\text{BS}}(\sigma)$ is the Black-Scholes price of the option for a given volatility $\sigma$.
-
-The goal is to find the implied volatility $\sigma$ that makes the Black-Scholes price as close to the market price as possible.
-
-Steps of the Newton-Raphson Method for Implied Volatility:
-
-1. **Initialization**: Start with an initial guess for implied volatility, $\sigma$. Often, this guess is something reasonable based on the market, like 20% (or 0.20).
-
-2. **Compute the Price and Vega**:
-   - Calculate the Black-Scholes price of the option using the current guess $\sigma$: $C_{\text{BS}}(\sigma)$.
-   - Compute the vega of the option. Vega is the sensitivity of the option's price to changes in volatility. This is required to adjust our guess in the next step.
-
-3. **Check for Convergence**: Calculate the difference between the market price and the Black-Scholes price: $\text{difference} = C_{\text{market}} - C_{\text{BS}}(\sigma)$. If this difference is smaller than a pre-defined tolerance (e.g., 0.0001), then $\sigma$ is close enough to the true implied volatility, and we stop.
-
-4. **Update the Guess**: If convergence is not achieved, we update our guess for $\sigma$ using the formula:
-\[ \sigma_{\text{new}} = \sigma_{\text{old}} - \frac{C_{\text{BS}}(\sigma_{\text{old}}) - C_{\text{market}}}{\text{vega}} \]
-The ratio in the formula can be thought of as the amount by which our Black-Scholes price is off, scaled by how sensitive the option price is to changes in volatility. This gives a good direction and magnitude for adjusting our guess.
-
-5. **Iterate**: Return to step 2 with the new guess $\sigma_{\text{new}}$ and repeat the process.
-
-6. **Stop Condition**: The iteration stops either when:
-   - The difference between $C_{\text{market}}$ and $C_{\text{BS}}(\sigma)$ is sufficiently small (convergence is achieved).
-   - A maximum number of iterations is reached. This ensures the method doesn't run indefinitely if it doesn't converge.
-
+The Newton-Raphson method is a root-finding algorithm that seeks to find successively better approximations to the roots of a real-valued function.
 
 First, let's set up our mathematical tools:
 

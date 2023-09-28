@@ -49,3 +49,19 @@ Delving into the intricacies of interest rate simulations, this post introduces 
 ## 11. [The Constraints of the Black-Scholes Model: A Data-Driven Analysis](/derivative_pricing/2023/08/21/bs_assumptions)
 
 Exploring the inherent limitations of the Black-Scholes model, this post offers a data-centric critique of its assumptions and real-world applicability.
+
+## 12. [Exploring the Volatility Smile with Yahoo Finance](/derivative_pricing/2023/08/22/implied_vol_and_vol_smile)
+
+Yahoo Finance offers a treasure trove of data on exchange-traded options, both calls and puts, for an underlying stock. What is particularly interesting for us is that it provides the Black-Scholes implied volatility for varying options and strikes.
+
+## 13. [Local Volatility Models: Dupire](/derivative_pricing/2023/09/28/local_vol_dupire)
+
+Diving deep into the implied volatility surface—a 3D visualization that extends the concept of the volatility smile.
+
+## 14. [Local Volatility Models: CEV (constant elasticity of variance) in Practice](/derivative_pricing/2023/09/28/local_vol_cev)
+
+Constant Elasticity of Variance (CEV) model. Not only will we implement this local volatility model in Python, but we'll also calibrate it to real-world implied volatility data. 
+
+## 15. [Stochastic Volatility: Heston](/derivative_pricing/2023/09/28/stochastic_vol_heston_mc_pricing)
+
+We start dealing with stochastic volatility models. Specifically, we will implement the Monte-Carlo simulation of the Heston (1993) stochastic volatility model.

@@ -11,35 +11,35 @@ In our previous discussion, we explored the fascinating world of volatility smil
 
 ## The Intricacies of Local Volatility Models
 
-In mathematical finance and financial engineering, a local volatility model treats volatility as a function of both the current asset level \( S_t \) and of time \( t \). This model generalizes the Black-Scholes model, where the volatility is a constant.
+In mathematical finance and financial engineering, a local volatility model treats volatility as a function of both the current asset level $ S_t $ and of time $ t $. This model generalizes the Black-Scholes model, where the volatility is a constant.
 
 ### Local Volatility vs. Stochastic Volatility Models
 
-Local volatility models are often compared with stochastic volatility models. In stochastic models, the instantaneous volatility is not just a function of \( S_t \) but also depends on a new "global" randomness coming from an additional random component.
+Local volatility models are often compared with stochastic volatility models. In stochastic models, the instantaneous volatility is not just a function of $ S_t $ but also depends on a new "global" randomness coming from an additional random component.
 
 ### Formulation
 
-In a local volatility model, the asset \( S_t \) that underlies a financial derivative typically follows a stochastic differential equation of the form:
+In a local volatility model, the asset $ S_t $ that underlies a financial derivative typically follows a stochastic differential equation of the form:
 
-\[
+$$
 dS_{t}=(r_{t}-d_{t})S_{t}\,dt+\sigma _{t}S_{t}\,dW_{t}
-\]
+$$
 
-Here, \( r_{t} \) is the instantaneous risk-free rate, and \( W_{t} \) is a Wiener process. The amplitude of randomness is measured by the instant volatility \( \sigma_t \).
+Here, $ r_{t} $ is the instantaneous risk-free rate, and $ W_{t} $ is a Wiener process. The amplitude of randomness is measured by the instant volatility $ \sigma_t $.
 
 #### Stochastic Volatility Model
 
-When the volatility has its own randomness—often described by a different equation driven by a different \( W \)—the model is called a stochastic volatility model.
+When the volatility has its own randomness—often described by a different equation driven by a different $ W $—the model is called a stochastic volatility model.
 
 #### Local Volatility Model
 
-When the volatility is merely a function of the current underlying asset level \( S_t \) and of time \( t \), we have a local volatility model. The model is then:
+When the volatility is merely a function of the current underlying asset level $ S_t $ and of time $ t $, we have a local volatility model. The model is then:
 
-\[
+$$
 dS_{t}=(r_{t}-d_{t})S_{t}\,dt+\sigma (S_{t},t)S_{t}\,dW_{t}
-\]
+$$
 
-"Local volatility" denotes the set of diffusion coefficients \( \sigma_t = \sigma(S_t, t) \) consistent with market prices for all options on a given underlying, which yields an asset price model of this type.
+"Local volatility" denotes the set of diffusion coefficients $ \sigma_t = \sigma(S_t, t) $ consistent with market prices for all options on a given underlying, which yields an asset price model of this type.
 
 ### Application in Exotic Option Valuation
 

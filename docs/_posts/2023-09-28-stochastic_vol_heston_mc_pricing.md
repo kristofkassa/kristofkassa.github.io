@@ -14,55 +14,55 @@ The Heston Stochastic Volatility Model is a mathematical model that aims to capt
 ### Formula
 The Heston model describes two stochastic differential equations (SDEs):
 
-1. For the asset price \( S(t) \):
+1. For the asset price $ S(t) $:
 
-\[
+$$
 dS(t) = \mu S(t) dt + \sqrt{V(t)} S(t) dW_1(t)
-\]
+$$
 
-2. For the volatility \( V(t) \):
+2. For the volatility $ V(t) $:
 
-\[
+$$
 dV(t) = \kappa (\theta - V(t)) dt + \xi \sqrt{V(t)} dW_2(t)
-\]
+$$
 
 Where:
-- \( \mu \) = Risk-free rate
-- \( S(t) \) = Asset price at time \( t \)
-- \( V(t) \) = Volatility at time \( t \)
-- \( dW_1(t), dW_2(t) \) = Wiener processes, potentially correlated with correlation coefficient \( \rho \)
-- \( \kappa \) = Rate at which \( V(t) \) reverts to \( \theta \)
-- \( \theta \) = Long-term mean of the volatility process
-- \( \xi \) = Volatility of volatility
+- $ \mu $ = Risk-free rate
+- $ S(t) $ = Asset price at time $ t $
+- $ V(t) $ = Volatility at time $ t $
+- $ dW_1(t), dW_2(t) $ = Wiener processes, potentially correlated with correlation coefficient $ \rho $
+- $ \kappa $ = Rate at which $ V(t) $ reverts to $ \theta $
+- $ \theta $ = Long-term mean of the volatility process
+- $ \xi $ = Volatility of volatility
 
 ### Key Concepts
 1. **Stochastic Volatility**: Unlike constant volatility models like Black-Scholes, the Heston model allows volatility to be a random function of time.
   
-2. **Mean Reversion**: The model includes a mean-reversion term (\( \kappa (\theta - V(t)) \)), which makes the volatility revert to a long-term mean (\( \theta \)) over time.
+2. **Mean Reversion**: The model includes a mean-reversion term ($ \kappa (\theta - V(t)) $), which makes the volatility revert to a long-term mean ($ \theta $) over time.
   
-3. **Volatility of Volatility**: The Heston model accounts for the "volatility of volatility" through the \( \xi \) term, allowing the model to capture the "smile" or "skew" in the implied volatility surface.
+3. **Volatility of Volatility**: The Heston model accounts for the "volatility of volatility" through the $ \xi $ term, allowing the model to capture the "smile" or "skew" in the implied volatility surface.
 
-4. **Correlation**: The model also includes a term (\( \rho \)) to capture the correlation between the asset price and its volatility.
+4. **Correlation**: The model also includes a term ($ \rho $) to capture the correlation between the asset price and its volatility.
 
 To simulate these continuous-time processes, you often need to discretize them. This is done to approximate the changes in the asset price and volatility over small periods of time. A common method of discretization is the Euler-Maruyama scheme.
 
 ### Discretization Using Euler-Maruyama Scheme
 
-Euler-Maruyama is a numerical method used for approximating solutions to SDEs. In this scheme, a continuous-time stochastic process is approximated over discrete time intervals of length \( dt \). The scheme transforms the original continuous-time SDEs into the discrete-time formulas you presented.
+Euler-Maruyama is a numerical method used for approximating solutions to SDEs. In this scheme, a continuous-time stochastic process is approximated over discrete time intervals of length $ dt $. The scheme transforms the original continuous-time SDEs into the discrete-time formulas you presented.
 
-#### Asset Price \( S_t \)
-\[
+#### Asset Price $ S_t $
+$$
 S_t = S_{t-1} e^{\left( r - \frac{\nu_t}{2} \right) dt + \sqrt{\nu_t} dZ_1 \sqrt{dt}}
-\]
-Here, \( r \) is the risk-free rate, \( \nu_t \) is the volatility at time \( t \), \( dt \) is the time step, and \( dZ_1 \) is a sample from a standard normal distribution. The term \( e^{\left( r - \frac{\nu_t}{2} \right) dt} \) is the drift term, and \( \sqrt{\nu_t} dZ_1 \sqrt{dt} \) is the stochastic term.
+$$
+Here, $ r $ is the risk-free rate, $ \nu_t $ is the volatility at time $ t $, $ dt $ is the time step, and $ dZ_1 $ is a sample from a standard normal distribution. The term $ e^{\left( r - \frac{\nu_t}{2} \right) dt} $ is the drift term, and $ \sqrt{\nu_t} dZ_1 \sqrt{dt} $ is the stochastic term.
 
-#### Volatility \( \nu_t \)
-\[
+#### Volatility $ \nu_t $
+$$
 \nu_t = \nu_{t-1} + \kappa \left( \theta - \nu_{t-1} \right) dt + \xi \sqrt{\nu_{t-1}} dZ_2 \sqrt{dt}
-\]
-Here, \( \kappa \) is the rate at which volatility reverts to the long-term mean \( \theta \), \( \xi \) is the volatility of volatility, and \( dZ_2 \) is another sample from a standard normal distribution.
+$$
+Here, $ \kappa $ is the rate at which volatility reverts to the long-term mean $ \theta $, $ \xi $ is the volatility of volatility, and $ dZ_2 $ is another sample from a standard normal distribution.
 
-These formulas allow you to simulate \( S_t \) and \( \nu_t \) iteratively over a sequence of discrete time steps, thus providing a numerical approximation to the Heston model's continuous-time behavior.
+These formulas allow you to simulate $ S_t $ and $ \nu_t $ iteratively over a sequence of discrete time steps, thus providing a numerical approximation to the Heston model's continuous-time behavior.
 
 As usual, let's start by importing the necessary libraries.
 

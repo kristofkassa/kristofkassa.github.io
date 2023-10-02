@@ -13,39 +13,39 @@ Now we're diving into the Constant Elasticity of Variance (CEV) model. Not only 
 
 The CEV model describes the stock price dynamics with the following stochastic differential equation (SDE) under a risk-neutral measure:
 
-\[ dS_t = r S_t dt + \sigma S_t^\gamma dW_t \]
+$$ dS_t = r S_t dt + \sigma S_t^\gamma dW_t $$
 
 ### Explanation of Terms:
 
-- $ dS_t $: The infinitesimal change in the stock price \(S\) at time \(t\).
+- $ dS_t $: The infinitesimal change in the stock price $ S $ at time $ t $.
   
-- \(S_t\): The stock price at time \(t\).
+- $S_t$: The stock price at time $t$.
   
-- \(r\): The risk-free rate, assumed to be constant. It represents the time-value of money. In a risk-neutral world, \(r\) is the rate at which the stock price grows in expectation.
+- $r$: The risk-free rate, assumed to be constant. It represents the time-value of money. In a risk-neutral world, $r$ is the rate at which the stock price grows in expectation.
 
-- \(dt\): A small change in time.
+- $dt$: A small change in time.
   
-- \(\sigma\): The volatility coefficient, assumed to be constant. It quantifies the market's expectation of the stock's volatility.
+- $\sigma$: The volatility coefficient, assumed to be constant. It quantifies the market's expectation of the stock's volatility.
   
-- \(\gamma\): The elasticity coefficient that controls how the volatility scales with the stock price. If \(\gamma = 1\), the model reduces to the Black-Scholes model.
+- $\gamma$: The elasticity coefficient that controls how the volatility scales with the stock price. If $\gamma = 1$, the model reduces to the Black-Scholes model.
   
-- \(dW_t\): The increment of a Wiener process (or Brownian motion) at time \(t\), representing the randomness in stock price changes.
+- $dW_t$: The increment of a Wiener process (or Brownian motion) at time $t$, representing the randomness in stock price changes.
 
 ### Local Volatility
 
 The local volatility function in the CEV model is given by:
 
-\[
+$$
 \sigma(S_t, t) = \sigma S_t^{\gamma-1}
-\]
+$$
 
 In this equation:
 
-- \(\sigma(S_t, t)\): Represents the local volatility, which is dependent on the current stock price \(S_t\) and time \(t\).
+- $\sigma(S_t, t)$: Represents the local volatility, which is dependent on the current stock price $S_t$ and time $t$.
   
-- \(\sigma\): As before, this is a constant representing the "base" level of volatility.
+- $\sigma$: As before, this is a constant representing the "base" level of volatility.
 
-- \(S_t^{\gamma-1}\): Modulates the volatility depending on the stock price and the elasticity parameter \(\gamma\).
+- $S_t^{\gamma-1}$: Modulates the volatility depending on the stock price and the elasticity parameter $\gamma$.
 
 Contrary to some classifications as a stochastic volatility model, the CEV model is a local volatility model because the diffusion coefficient doesn't introduce new randomness; it is fully determined by the stock price and time.
 

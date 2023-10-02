@@ -13,13 +13,11 @@ Now we're diving into the Constant Elasticity of Variance (CEV) model. Not only 
 
 The CEV model describes the stock price dynamics with the following stochastic differential equation (SDE) under a risk-neutral measure:
 
-\[
-dS_t = r S_t dt + \sigma S_t^\gamma dW_t
-\]
+\[ dS_t = r S_t dt + \sigma S_t^\gamma dW_t \]
 
 ### Explanation of Terms:
 
-- \(dS_t\): The infinitesimal change in the stock price \(S\) at time \(t\).
+- $ dS_t $: The infinitesimal change in the stock price \(S\) at time \(t\).
   
 - \(S_t\): The stock price at time \(t\).
   

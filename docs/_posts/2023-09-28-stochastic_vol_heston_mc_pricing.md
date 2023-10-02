@@ -242,6 +242,105 @@ ax2.set_xlabel("Log-returns")
 
 In the previous graphs, you can observe the fit (and no-fit) of the different distributions produced to known distributions assumed in other models.
 
+Now that we have simulated all the stock prices under Heston, let's define another function that calculates the payoffs and current price of a European call option with the following characteristics:
+
+- $T=1$ year
+- $K = 90$
+- $r=0.05$
+- $S_t \sim$ Heston dynamics
+
+```python
+def heston_call_mc(S, K, r, T, t):
+    payoff = np.maximum(0, S[-1, :] - K)
+
+    average = np.mean(payoff)
+
+    return np.exp(-r * (T - t)) * average
+```
+
+Note that you can improve the efficiency of the previous function substantially by implementing a better and more organized function that incorporates the generation of stock price and volatility paths. I recommend you work on this by yourself (it should be fairly easy). At this point, we just want to highlight how we apply the spirit of the Monte-Carlo method in simpler frameworks.
+
+So, the price of a European Call option with 1 year maturity and strike 𝐾=90 (and all the other assumed parameters from before) is...
+
+```python
+print("European Call Price under Heston: ", heston_call_mc(S, 90, 0.05, 1, 0))
+European Call Price under Heston:  7.368689816806795
+```
+
+### Comparison of Heston Option Price versus Other Methods
+
+Let's now see how the value of the option via Heston model differs from what we would have under the Black-Scholes framework, for example.
+
+- Black-Scholes closed-form solution:
+
+```python
+def bs_call_price(S, r, sigma, t, T, K):
+    ttm = T - t
+
+    if ttm < 0:
+        return 0.0
+    elif ttm == 0.0:
+        return np.maximum(S - K, 0.0)
+
+    vol = sigma * np.sqrt(ttm)
+
+    d_minus = np.log(S / K) + (r - 0.5 * sigma**2) * ttm
+    d_minus /= vol
+
+    d_plus = d_minus + vol
+
+    res = S * ss.norm.cdf(d_plus)
+    res -= K * np.exp(-r * ttm) * ss.norm.cdf(d_minus)
+
+    return res
+
+print("European Call Price under BS: ", bs_call_price(100, 0.05, sigma_v, 0, 1, 90))
+European Call Price under BS:  19.697442086839736
+```
+
+- Black-Scholes Monte-Carlo price:
+
+```python
+def bs_call_mc(S, K, r, sigma, T, t, Ite):
+    data = np.zeros((Ite, 2))
+    z = np.random.normal(0, 1, [1, Ite])
+    ST = S * np.exp((T - t) * (r - 0.5 * sigma**2) + sigma * np.sqrt(T - t) * z)
+    data[:, 1] = ST - K
+
+    average = np.sum(np.amax(data, axis=1)) / float(Ite)
+
+    return np.exp(-r * (T - t)) * average
+
+print(
+    "European Call Price under BS (MC): ",
+    bs_call_mc(100, 90, 0.05, sigma_v, 1, 0, 10000),
+)
+European Call Price under BS (MC):  19.71266956387397    
+```
+
+Interestingly, we get prices that are very far away from each other. Is this a problem? Does our model not work?
+
+Not at all! At the end of the day, why would the Heston option price converge to Black-Scholes?
+
+- We have already established that BS is an oversimplification of reality (*remember: stylized facts!*)
+
+- Heston (and other models) are just **extending the BS world** to get closer to this reality.
+
+- The latter seems clearer when you look at Lesson 1 and the statistical distribution under Heston. There is more kurtosis and skewness than normal distribution, just as we observe in practice.
+
+- If BS and Heston get to the same output, what is the point of adding mathematical and computational complexity?
+
+There is another important issue related to model specification and parameters:
+
+- In the latter pricing example, we have used a $\sigma=0.3$ for both models. 
+
+- This is not correct, since there is no easy mapping of the volatility parameter from one model to the other. In other words, the $\sigma$ parameter cannot be used interchangeably in Heston or Black-Scholes.
+
+- What is the real $\sigma$ for each model then? Do not worry; we will tackle this issue through calibration.
+
+
 ## Conclusion
 
-Well done! Now you know a lot more about how to implement the Heston model in Python. Arguably, one thing we have not yet covered explicitly is pricing in the Heston framework. This is exactly what we will do soon.
+At the beginning of the course, we introduced a simple framework to work on, i.e., the binomial model. What we have been doing since, essentially, is advancing our understanding towards more complex models that try to capture the different features associated with underlying stock prices and returns. From Black-Scholes to the Heston model, we have merely focused on modeling the underlying price, whereas the intuition on option pricing remained intact. For the final part of the Derivative Pricing course, we will focus on one more stylized fact of stock prices: jumps.
+
+In the next post, we will take a look at jumps in prices, as well as how can we formally model those jumps to incorporate them in our pricing.

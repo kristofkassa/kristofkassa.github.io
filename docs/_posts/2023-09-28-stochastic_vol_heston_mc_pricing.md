@@ -51,15 +51,15 @@ To simulate these continuous-time processes, you often need to discretize them. 
 Euler-Maruyama is a numerical method used for approximating solutions to SDEs. In this scheme, a continuous-time stochastic process is approximated over discrete time intervals of length $ dt $. The scheme transforms the original continuous-time SDEs into the discrete-time formulas you presented.
 
 #### Asset Price $ S_t $
-$$
-S_t = S_{t-1} e^{\left( r - \frac{\nu_t}{2} \right) dt + \sqrt{\nu_t} dZ_1 \sqrt{dt}}
-$$
+
+$$ S_t = S_{t-1} e^{\left( r - \frac{\nu_t}{2} \right) dt + \sqrt{\nu_t} dZ_1 \sqrt{dt}} $$
+
 Here, $ r $ is the risk-free rate, $ \nu_t $ is the volatility at time $ t $, $ dt $ is the time step, and $ dZ_1 $ is a sample from a standard normal distribution. The term $ e^{\left( r - \frac{\nu_t}{2} \right) dt} $ is the drift term, and $ \sqrt{\nu_t} dZ_1 \sqrt{dt} $ is the stochastic term.
 
 #### Volatility $ \nu_t $
-$$
-\nu_t = \nu_{t-1} + \kappa \left( \theta - \nu_{t-1} \right) dt + \xi \sqrt{\nu_{t-1}} dZ_2 \sqrt{dt}
-$$
+
+$$ \nu_t = \nu_{t-1} + \kappa \left( \theta - \nu_{t-1} \right) dt + \xi \sqrt{\nu_{t-1}} dZ_2 \sqrt{dt} $$
+
 Here, $ \kappa $ is the rate at which volatility reverts to the long-term mean $ \theta $, $ \xi $ is the volatility of volatility, and $ dZ_2 $ is another sample from a standard normal distribution.
 
 These formulas allow you to simulate $ S_t $ and $ \nu_t $ iteratively over a sequence of discrete time steps, thus providing a numerical approximation to the Heston model's continuous-time behavior.

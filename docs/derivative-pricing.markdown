@@ -65,3 +65,27 @@ Constant Elasticity of Variance (CEV) model. Not only will we implement this loc
 ## 15. [Stochastic Volatility: Heston](/derivative_pricing/2023/09/28/stochastic_vol_heston_mc_pricing)
 
 We start dealing with stochastic volatility models. Specifically, we will implement the Monte-Carlo simulation of the Heston (1993) stochastic volatility model.
+
+## 16. [Merton model](/derivative_pricing/2023/10/02/merton)
+
+The Merton model is an extension of the Black-Scholes model, incorporating both stochastic volatility and jumps in asset prices. It provides a more realistic representation of asset price dynamics by capturing sudden, significant changes in asset values that occur in real markets.
+
+## 17. [Fourier-Based Option Pricing](/derivative_pricing/2023/10/17/fourier_methods)
+
+We will check the usefulness of Fourier transform methods for option pricing. We will do so in a setting that is already very familiar to us: the Black-Scholes model.
+
+## 18. [Fourier Methods for Heston Model](/derivative_pricing/2023/10/17/fourier_for_heston)
+
+We saw the performance of Fourier-based methods and Lewis's approach for option pricing under the Black-Scholes model. In this lesson, we will revisit these methods in the context of the Heston (1993) model. First, we will focus on pricing via the Heston model under these methods. Then, we will use them to calibrate the model to observed market prices.
+
+## 19. [Merton Model Calibration](/derivative_pricing/2023/10/17/merton_model_calibration)
+
+We will look at how to use previously learned methods like Lewis (2001) on Merton (1976) model in order to perform model calibration.
+
+## 20. [Bates (1996) in practice](/derivative_pricing/2023/10/17/bates_in_practice)
+
+We will look at how to use previously learned methods like Lewis (2001) and FFT on the Bates (1996) model. 
+
+## 21. [Calibrating Bates (1996)](/derivative_pricing/2023/10/17/calibrating_bates)
+
+We will use Lewis (2001) approach to fully calibrate Bates (1996) model based on real option market quotes for the EuroStoxx 50, as we have done before for other models. Different from the calibrations we have done so far, Bates (1996) requires a sequential procedure, whereby we first calibrate the stochastic volatility component of a Heston (1993) type of model. Then, we use those parameters to calibrate the jump component of Bates (1996). Finally, we calibrate, via local optimization, the general model.
